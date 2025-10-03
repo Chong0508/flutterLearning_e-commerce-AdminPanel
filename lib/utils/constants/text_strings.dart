@@ -7,6 +7,17 @@ class TTexts {
   static const String done = "Done";
   static const String and = "and";
   static const String skip = "skip";
+
+  // -- Admin Default Credentials
+  static const String adminEmail = "mk.chong5@gmail.com";
+  static const String adminPassword = "Admin@123";
+
+  // -- Storage Paths
+  static const String bannersStoragePath = "/Banners";
+  static const String brandsStoragePath = "/Brands";
+  static const String categoriesStoragePath = "/Categories";
+  static const String productsStoragePath = "/Products";
+  static const String usersStoragePath = "/Users";
   
   // -- OnBording Texts
   static const String onBoardingTitle1 = "Choose your product";
@@ -51,6 +62,7 @@ class TTexts {
   static const String emailNotReceivedMessage = "Didn't get the email? Check your junk/spam or resend it.";
   static const String yourAccountCreatedTitle = "Your account successfully created!";
   static const String yourAccountCreatedSubTitle = "Welcome to Your Ultimate Shopping Destination: Your Account is Created, Unleash theJoy of Seamless Online Shopping";
+  
   // -- Home
   static const String homeAppBarTitle = "Good day for shopping";
   static const String homeAppBarSubTitle = "TaimoorSikandar";
