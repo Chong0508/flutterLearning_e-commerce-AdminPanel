@@ -1,3 +1,6 @@
+import 'package:e_commerce_admin_panel/common/widgets/layouts/templates/site_layout.dart';
+import 'package:e_commerce_admin_panel/features/authentication/screens/forget_password/responsive_screens/forget_password_desktop_tablet.dart';
+import 'package:e_commerce_admin_panel/features/authentication/screens/forget_password/responsive_screens/forget_password_mobile.dart';
 import 'package:flutter/material.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
@@ -5,6 +8,6 @@ class ForgetPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const TSiteTemplate(useLayout: false, desktop: ForgetPasswordScreenDesktopTablet(), mobile: ForgetPasswordScreenMobile());
   }
 }

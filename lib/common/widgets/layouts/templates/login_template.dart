@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class TLoginTemplate extends StatelessWidget {
   const TLoginTemplate({
     super.key,
-    required this.child
+    required this.child,
   });
 
   /// The widget to be displayed inside the login template
@@ -27,6 +27,15 @@ class TLoginTemplate extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
               color: dark ? TColors.black : TColors.white,
+              boxShadow: [
+                // Add BoxShadow to Wrap the content inside a box
+                BoxShadow(
+                  color: Colors.black12.withOpacity(0.1),
+                  blurRadius: 15,
+                  spreadRadius: 2,
+                  offset: const Offset(0, 5),
+                ),
+              ],
             ),
             child: child,
           ),

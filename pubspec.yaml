@@ -14,7 +14,7 @@ dependencies:
 
   # Utility Packages
   intl: ^0.20.2
-  lottie: 3.3.1
+  lottie: ^3.3.1
   shimmer: ^3.0.0
   clipboard: ^2.0.2
   image_picker: ^1.2.0
@@ -58,31 +58,29 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  # -------------- LOCAL ASSETS ------------------- #
+  assets:
+    - assets/logos/
+    - assets/images/content/
+    - assets/images/animations/
+    - assets/icons/payment_methods/
 
-
-# -------------- LOCAL ASSETS ------------------- #
-assets:
-  - assets/logos/
-  - assets/images/content/
-  - assets/images/animations/
-  - assets/icons/payment_methods/
-
-# -------------- LOCAL FONTS -------------------- #
-fonts:
-  - family: Urbanist
-    fonts: 
-     - assets: assets/fonts/urbanist/Urbanist-Light-ttf
-       weight: 300
-     - assets: assets/fonts/urbanist/Urbanist-Regular-ttf
-       weight: 400
-     - assets: assets/fonts/urbanist/Urbanist-Italic-ttf
-       style: italic
-     - assets: assets/fonts/urbanist/Urbanist-Medium-ttf
-       weight: 500
-     - assets: assets/fonts/urbanist/Urbanist-MediumItalic-ttf
-       weight: 500
-       style: italic
-     - assets: assets/fonts/urbanist/Urbanist-SemiBold-ttf
-       weight: 600
-     - assets: assets/fonts/urbanist/Urbanist-Bold-ttf
-       weight: 800
+  # -------------- LOCAL FONTS -------------------- #
+  fonts:
+    - family: Urbanist
+      fonts: 
+        - asset: assets/fonts/urbanist/Urbanist-Light.ttf
+          weight: 300
+        - asset: assets/fonts/urbanist/Urbanist-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/urbanist/Urbanist-Italic.ttf
+          style: italic
+        - asset: assets/fonts/urbanist/Urbanist-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/urbanist/Urbanist-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/urbanist/Urbanist-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/urbanist/Urbanist-Bold.ttf
+          weight: 800

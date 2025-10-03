@@ -6,7 +6,7 @@ import 'package:iconsax/iconsax.dart';
 
 
 class TLoaders {
-  static hdeSnacker() => ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
+  static hideSnacker() => ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
 
   static customToast({required message}) {
     ScaffoldMessenger.of(Get.context!).showSnackBar(

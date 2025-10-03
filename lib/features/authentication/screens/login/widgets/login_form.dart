@@ -1,4 +1,5 @@
 import 'package:e_commerce_admin_panel/features/authentication/controllers/login_controller.dart';
+import 'package:e_commerce_admin_panel/routes/routes.dart';
 import 'package:e_commerce_admin_panel/utils/constants/sizes.dart';
 import 'package:e_commerce_admin_panel/utils/constants/text_strings.dart';
 import 'package:e_commerce_admin_panel/utils/validators/validation.dart';
@@ -63,7 +64,7 @@ class LoginForm extends StatelessWidget {
                 ),
     
                 /// Forget Password
-                TextButton(onPressed: () {}, child: Text(TTexts.forgetPassword)),
+                TextButton(onPressed: () => Get.toNamed(TRoutes.forgetPassword), child: Text(TTexts.forgetPassword)),
               ],
             ),
             const SizedBox(height: TSizes.spaceBtwSections),
@@ -71,7 +72,7 @@ class LoginForm extends StatelessWidget {
             /// Sign In Button
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(onPressed: () => controller.registerAdmin(), child: Text(TTexts.signIn)),
+              child: ElevatedButton(onPressed: () => controller.emailAndPasswordSignIn(), child: Text(TTexts.signIn)),
             )
           ],
         )),
