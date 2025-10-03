@@ -28,6 +28,6 @@ class TRoutes {
   static const orders = '/orders';
 
   static List sideMenuItems = [
-    banners, products, categories, brands, customers, orders
+    dashboard
   ];
 }
