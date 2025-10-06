@@ -1,6 +1,4 @@
-import 'package:e_commerce_admin_panel/data/repositories/authentication/authentication_repository.dart';
 import 'package:e_commerce_admin_panel/features/authentication/controllers/forget_password_controller.dart';
-import 'package:e_commerce_admin_panel/routes/routes.dart';
 import 'package:e_commerce_admin_panel/utils/constants/sizes.dart';
 import 'package:e_commerce_admin_panel/utils/constants/text_strings.dart';
 import 'package:e_commerce_admin_panel/utils/validators/validation.dart';

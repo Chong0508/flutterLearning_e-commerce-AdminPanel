@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_admin_panel/data/repositories/authentication/authentication_repository.dart';
-import 'package:e_commerce_admin_panel/features/personalization/models/user_model.dart';
+import 'package:e_commerce_admin_panel/features/authentication/models/user_model.dart';
 import 'package:e_commerce_admin_panel/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:e_commerce_admin_panel/utils/exceptions/firebase_exceptions.dart';
 import 'package:e_commerce_admin_panel/utils/exceptions/format_exceptions.dart';

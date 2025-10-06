@@ -1,6 +1,7 @@
 import 'package:e_commerce_admin_panel/features/authentication/screens/forget_password/forget_password.dart';
 import 'package:e_commerce_admin_panel/features/authentication/screens/login/login.dart';
 import 'package:e_commerce_admin_panel/features/authentication/screens/reset_password/reset_password.dart';
+import 'package:e_commerce_admin_panel/features/shop/screens/dashboard/dashboard.dart';
 import 'package:e_commerce_admin_panel/routes/routes.dart';
 import 'package:e_commerce_admin_panel/routes/routes_middleware.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -10,7 +11,7 @@ class TAppRoute {
     GetPage(name: TRoutes.login, page: () => const LoginScreen()),
     GetPage(name: TRoutes.forgetPassword, page: () => const ForgetPasswordScreen()),
     GetPage(name: TRoutes.resetPassword, page: () => const ResetPasswordScreen()),
-    //GetPage(name: TRoutes.dashboard, page: () => const DashboardScreen(), middlewares: [TRouteMiddleware()]),
+    GetPage(name: TRoutes.dashboard, page: () => const DashboardScreen(), middlewares: [TRouteMiddleware()]),
     //GetPage(name: TRoutes.media, page: () => const MediaScreen(), middlewares: [TRouteMiddleware()]),
 
     // Banners
