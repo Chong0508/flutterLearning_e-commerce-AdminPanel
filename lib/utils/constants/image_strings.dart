@@ -25,6 +25,7 @@ class TImages {
   static const String successfullyRegisterAnimation = "images/animations/successfullyRegisterAnimation.json";
   static const String pencilAnimation = "images/animations/pencilAnimation.json";
   static const String cartAnimation = "images/animations/cartAnimation.json";
+  static const String packageAnimation = "images/animations/packageAnimation.json";
 
   // -- Category Icons
   static const String sportIcon = "icons/categories/sportIcon.jpg";

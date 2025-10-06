@@ -23,14 +23,19 @@ class TAnimationLoaderWidget extends StatelessWidget {
     required this.animation,
     this.showAction = false,
     this.actionText, 
-    this.onActionPressed
+    this.onActionPressed,
+    this.height,
+    this.width,
+    this.style
   });
 
   final String text;
+  final TextStyle? style;
   final String animation;
   final bool showAction;
   final String? actionText;
   final VoidCallback? onActionPressed;
+  final double? height, width;
 
   @override
   Widget build(BuildContext context) {
