@@ -1,4 +1,7 @@
+import 'package:e_commerce_admin_panel/common/widgets/containers/rounded_container.dart';
 import 'package:e_commerce_admin_panel/features/shop/screens/dashboard/widgets/dashboard_card.dart';
+import 'package:e_commerce_admin_panel/features/shop/screens/dashboard/widgets/order_status_graph.dart';
+import 'package:e_commerce_admin_panel/features/shop/screens/dashboard/widgets/weekly_sales.dart';
 import 'package:e_commerce_admin_panel/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
@@ -23,17 +26,29 @@ class DashboardTabletScreen extends StatelessWidget {
                 children: [
                   Expanded(child: TDashboardCard(title: 'Sales Total', subTitle: '\$365.6', stats: 25)),
                   SizedBox(width: TSizes.spaceBtwItems),
-                  Expanded(child: TDashboardCard(title: 'Sales Total', subTitle: '\$365.6', stats: 25)),
+                  Expanded(child: TDashboardCard(title: 'Average Order Value', subTitle: '\$25', stats: 15)),
                 ],
               ),
               const SizedBox(height: TSizes.spaceBtwItems),
               Row(
                 children: [
-                  Expanded(child: TDashboardCard(title: 'Sales Total', subTitle: '\$365.6', stats: 25)),
+                  Expanded(child: TDashboardCard(title: 'Total Orders', subTitle: '36', stats: 44)),
                   SizedBox(width: TSizes.spaceBtwItems),
-                  Expanded(child: TDashboardCard(title: 'Sales Total', subTitle: '\$365.6', stats: 25)),
+                  Expanded(child: TDashboardCard(title: 'Visitors', subTitle: '25035', stats: 2)),
                 ],
-              )
+              ),
+              const SizedBox(height: TSizes.spaceBtwSections),
+
+              /// Bar Graph
+              const TWeeklySalesGraph(),
+              const SizedBox(height: TSizes.spaceBtwSections),
+
+              /// Orders
+              const TRoundedContainer(),
+              const SizedBox(height: TSizes.spaceBtwSections),
+
+              /// Pie Chart
+              const OrderStatusPieChart(),
             ],
           ),
         ),
