@@ -13,7 +13,8 @@ class TRoundedContainer extends StatelessWidget {
     this.showBorder = true,
     this.radius = TSizes.cardRadiusLg,
     this.backgroundColor = TColors.white,
-    this.borderColor = TColors.borderPrimary
+    this.borderColor = TColors.borderPrimary,
+    this.onTap
   });
 
   final double? width, height;
@@ -24,6 +25,7 @@ class TRoundedContainer extends StatelessWidget {
   final Color backgroundColor;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {

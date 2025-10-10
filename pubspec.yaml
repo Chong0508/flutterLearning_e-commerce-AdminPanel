@@ -31,7 +31,7 @@ dependencies:
   web: ^1.1.1
   http: ^1.5.0
   html: ^0.15.6
-  fl_chart: ^1.0.0
+  fl_chart: ^0.60.0
   data_table_2: ^2.6.0
   url_strategy: ^0.2.0     
 

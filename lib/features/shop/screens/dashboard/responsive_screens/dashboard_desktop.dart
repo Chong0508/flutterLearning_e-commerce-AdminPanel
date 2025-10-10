@@ -1,147 +1,161 @@
-import 'package:data_table_2/data_table_2.dart';
-import 'package:e_commerce_admin_panel/common/widgets/data_table/paginated_data_table.dart';
+import 'package:e_commerce_admin_panel/common/widgets/containers/rounded_container.dart';
+import 'package:e_commerce_admin_panel/features/shop/controllers/dashboard/dashboard_controller.dart';
+import 'package:e_commerce_admin_panel/features/shop/screens/dashboard/widgets/dashboard_card.dart';
+import 'package:e_commerce_admin_panel/utils/constants/colors.dart';
 import 'package:e_commerce_admin_panel/utils/constants/sizes.dart';
+import 'package:e_commerce_admin_panel/utils/device/device_utility.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
 class DashboardDesktopScreen extends StatelessWidget {
   const DashboardDesktopScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final DashboardController controller = Get.put(DashboardController());
-
+    final controller = Get.put(DashboardController());
+    
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Center(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextFormField(
-                controller: controller.searchTextController,
-                onChanged: (query) => controller.searchQuery(query),
-                decoration: const InputDecoration(hintText: 'Search', prefix: Icon(Iconsax.search_normal)),
+              // Heading
+              Text('Dashboard', style: Theme.of(context).textTheme.headlineLarge),
+              const SizedBox(height: TSizes.spaceBtwSections),
+
+              // Cards
+              Row(
+                children: [
+                  Expanded(child: TDashboardCard(title: 'Sales Total', subTitle: '\$365.6', stats: 25)),
+                  SizedBox(width: TSizes.spaceBtwItems),
+                  Expanded(child: TDashboardCard(title: 'Sales Total', subTitle: '\$365.6', stats: 25)),
+                  SizedBox(width: TSizes.spaceBtwItems),
+                  Expanded(child: TDashboardCard(title: 'Sales Total', subTitle: '\$365.6', stats: 25)),
+                  SizedBox(width: TSizes.spaceBtwItems),
+                  Expanded(child: TDashboardCard(title: 'Sales Total', subTitle: '\$365.6', stats: 25)),
+                ]
               ),
               const SizedBox(height: TSizes.spaceBtwSections),
-              
-              Obx(
-                () {
-                  // Orders & Selected Rows are Hidden => Just to update the UI => Obx => [ProductRows]
-                  Visibility(visible: false, child: Text(controller.filteredDataList.length.toString()));
 
-                  return TPaginatedDataTable(
-                    /// SORTING
-                    sortAscending: controller.sortAscending.value,
-                    sortColumnIndex: controller.sortColumnIndex.value,
-                  
-                    columns: [
-                      DataColumn2(label: Text('Column 1')),
-                      DataColumn(
-                        label: Text('Column 2'), 
-                        onSort: (columnIndex, ascending) => controller.sortById(columnIndex, ascending)
-                      ),
-                      DataColumn(label: Text('Column 3')),
-                      DataColumn(
-                        label: Text('Column 4'), 
-                        onSort: (columnIndex, ascending) => controller.sortById(columnIndex, ascending)
-                      ),
-                    ],
-                    source: MyData(),
-                  );
-                } 
-              ),
+              // GRAPHS
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      children: [
+                        /// Bar Graph
+                        TRoundedContainer(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Weekly Sales', style: Theme.of(context).textTheme.headlineSmall),
+                              const SizedBox(height: TSizes.spaceBtwSections),
+
+                              // Graph
+                              SizedBox(
+                                height: 400,
+                                child: BarChart(
+                                  BarChartData(
+                                    titlesData: buildFlTitlesData(),
+                                    borderData: FlBorderData(show: true, border: const Border(top: BorderSide.none, right: BorderSide.none)),
+                                    gridData: FlGridData(
+                                      show: true,
+                                      drawHorizontalLine: true,
+                                      drawVerticalLine: true,
+                                      horizontalInterval: 200
+                                    ),
+                                    barGroups: controller.weeklySales
+                                        .asMap()
+                                        .entries
+                                        .map((entry) => BarChartGroupData(
+                                              x: entry.key,
+                                    barRods: [
+                                      BarChartRodData(
+                                        width: 30,
+                                        toY: entry.value,
+                                        color: TColors.primary,
+                                        borderRadius: BorderRadius.circular(TSizes.sm)
+                                      )
+                                    ]
+                                            ))
+                                        .toList(),
+                                    groupsSpace: TSizes.spaceBtwItems,
+                                    barTouchData: BarTouchData(
+                                      touchTooltipData: BarTouchTooltipData(
+                                        tooltipBgColor: TColors.secondary,
+                                      ),
+                                      touchCallback: TDeviceUtils.isDesktopScreen(context) ? (barTouchEvent, barTouchResponse) {} : null
+                                    )
+                                  )
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: TSizes.spaceBtwSections),
+                        
+                        /// Orders
+                        TRoundedContainer(),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: TSizes.spaceBtwSections),
+
+                  /// Pie Chart
+                  TRoundedContainer()
+                ],
+              )
+              
             ],
           ),
         ),
       ),
     );
   }
+  
+  FlTitlesData buildFlTitlesData() {
+  return FlTitlesData(
+    show: true,
+    bottomTitles: AxisTitles(
+      sideTitles: SideTitles(
+        showTitles: true,
+        getTitlesWidget: (value, meta) {
+          // Map index to the desired day of the week
+          final days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+          // Calculate the index and ensure it wraps around for the correct day
+          final index = value.toInt() % days.length;
+
+          // Get the day corresponding to the calculated index
+          final day = days[index];
+
+          return SideTitleWidget(
+            axisSide: meta.axisSide,
+            space: 4,
+            child: Text(day),
+          );
+        },
+      ),
+    ),
+    leftTitles: AxisTitles(
+      sideTitles: SideTitles(
+        showTitles: true,
+        interval: 200,
+        reservedSize: 50,
+      ),
+    ),
+    rightTitles: AxisTitles(
+      sideTitles: SideTitles(showTitles: false),
+    ),
+    topTitles: AxisTitles(
+      sideTitles: SideTitles(showTitles: false),
+    ),
+  );
 }
 
-class MyData extends DataTableSource {
-  final DashboardController controller = Get.put(DashboardController());
-
-  @override
-  DataRow? getRow(int index) {
-    final data = controller.filteredDataList[index];
-
-    return DataRow2(
-      onTap: () {},
-      selected: controller.selectedRows[index],
-      onSelectChanged: (value) => controller.selectedRows[index] = value ?? false,
-      cells: [
-        DataCell(Text(data['Column 1'] ?? '')),
-        DataCell(Text(data['Column 2'] ?? '')),
-        DataCell(Text(data['Column 3'] ?? '')),
-        DataCell(Text(data['Column 4'] ?? '')),
-      ]);
-  }
-
-  @override
-  bool get isRowCountApproximate => false;
-
-  @override
-  int get rowCount => controller.filteredDataList.length;
-
-  @override
-  int get selectedRowCount => 0;
-
 }
 
-class DashboardController extends GetxController {
-  var dataList = <Map<String, String>>[].obs;
-  var filteredDataList = <Map<String, String>>[].obs;
-  RxList<bool> selectedRows = <bool>[].obs;    // Observable list to store selected rows
-
-  RxInt sortColumnIndex = 1.obs;     // Observable for tracking the index of the column for sorting
-  RxBool sortAscending = true.obs;   // Observable for tracking the sorting order (ascending or descending)
-  final searchTextController = TextEditingController();
-
-
-  @override
-  void onInit() {
-    super.onInit();
-    fetchDummyData();
-  }
-
-  void sortById(int sortColumnIndex, bool ascending) {
-    sortAscending.value = ascending;
-    filteredDataList.sort((a, b) {
-      if(ascending) {
-        return filteredDataList[0]['column1'].toString().toLowerCase().compareTo(filteredDataList[0]['column1'].toString().toLowerCase());
-      } else {
-        return filteredDataList[0]['column1'].toString().toLowerCase().compareTo(filteredDataList[0]['column1'].toString().toLowerCase());
-      }
-    });
-    this.sortColumnIndex.value = sortColumnIndex;
-  }
-
-  void searchQuery(String query) {
-    filteredDataList.assignAll(dataList.where((item) => item['column1']!.contains(query.toLowerCase())));
-  }
-
-  void fetchDummyData() {
-    selectedRows.assignAll(List.generate(36, (index) => false));  // Initialize selected rows
-
-    dataList.addAll(List.generate(
-      36, 
-        (index) => {
-          'Column1': 'Data ${index + 1} - 1',
-          'Column2': 'Data ${index + 1} - 2',
-          'Column3': 'Data ${index + 1} - 3',
-          'Column4': 'Data ${index + 1} - 4',
-        }  
-    ));
-
-    filteredDataList.addAll(List.generate(
-      36, 
-        (index) => {
-          'Column1': 'Data ${index + 1} - 1',
-          'Column2': 'Data ${index + 1} - 2',
-          'Column3': 'Data ${index + 1} - 3',
-          'Column4': 'Data ${index + 1} - 4',
-        }  
-    ));
-  }
-}
